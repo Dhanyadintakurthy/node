@@ -1,10 +1,15 @@
 //const { response, query } = require('express');
 //const express = require('express'); // for type : ommonjs
+import cors from "cors";
 import express, { request, response } from "express";
 import { MongoClient } from "mongodb";
 import dotenv from 'dotenv';
 import {movisRouter} from "./routes/movis.js";
+import {usersRouter} from "./routes/users.js";
 import { getmovis, postmovis, getmovisbyid } from "./hlp.js";
+import bcrypt from 'bcrypt';
+
+
 
 dotenv.config();
 //const { request } = require('http');
@@ -14,6 +19,7 @@ const PORT = process.env.PORT;
 console.log(PORT);
 //9000;
 app.use(express.json());
+app.use(cors());
 
 app.get("/",(request,response) => {
     response.send("hiiiii :)) this is dhanya")
@@ -35,4 +41,5 @@ export const client = await CreateConnection();
 
 app.listen(PORT, () => console.log("app started"));
 
-app.use("/movis",movisRouter)
+app.use("/movis",movisRouter);
+app.use("/users",usersRouter);

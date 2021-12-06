@@ -2,6 +2,9 @@
 //const express = require('express'); // for type : ommonjs
 import express, { request, response } from "express";
 import { MongoClient } from "mongodb";
+import dotenv from 'dotenv';
+
+dotenv.config();
 //const { request } = require('http');
 const app = express();
 
@@ -77,7 +80,10 @@ var movis = [{
 }
 ]
 
-const MONGO_URL = "mongodb://localhost";
+//const MONGO_URL = "mongodb://localhost";
+
+const MONGO_URL = process.env.MONGO_URL;
+//mongodb+srv://dhanya:<password>@cluster0.5vqmt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 
 async function CreateConnection(){
   const client = new MongoClient(MONGO_URL);

@@ -1,9 +1,14 @@
 import express from "express";
 import bcrypt from 'bcrypt';
 const router = express.Router();
-import { genpassword, getuserbyname ,postuser} from "../hlp.js";
+import { genpassword, getuserbyname ,postuser,getallusers} from "../hlp.js";
 import jwt from 'jsonwebtoken';
 
+router.get("/",async (request,response) => {
+    const allusers = await getallusers();
+    console.log(allusers);
+    response.send(allusers);
+});
 
 router.post("/signin",async(request,response)=>{
   const data = request.body;
@@ -30,11 +35,7 @@ router.post("/signin",async(request,response)=>{
         return;
       }
   }
-  //console.log(password);
-  //const result = await postmovis(data);
-  //response.send(userdb);
   
-  //response.send(data);
 
 });
 router.post("/login",async(request,response)=>{

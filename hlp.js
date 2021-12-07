@@ -14,6 +14,9 @@ async function getmovis() {
 async function postuser({username : username,password :hashpassword}){
   return await client.db("users").collection("users").insertMany([{username : username,password :hashpassword}]);
 }
+async function getallusers(){
+  return await client.db("users").collection("users").find({}).toArray();
+}
 async function getuserbyname(username){
   return await client.db("users").collection("users").findOne({username:username});
 }
@@ -26,4 +29,4 @@ async function genpassword(password) {
   return hashpassword;
 }
 //genpassword(password);
-export { getmovis, postmovis, getmovisbyid, genpassword, getuserbyname,postuser };
+export { getmovis, postmovis, getmovisbyid, genpassword, getuserbyname,postuser,getallusers };
